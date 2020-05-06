@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Name2Numbers</title>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="Discover the numerical value of your name"
+    />
+    <meta name="author" content="Eleonora Musicco" />
+    <meta
+      name="keywords"
+      content="Math, Names, mathematical values, colors, transformations"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="src/ele.js"></script>
+    <link rel="stylesheet" href="src/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Name2Numbers</h1>
+      <br />
+      <img class="img" src="src/illustration.png.png" />
+    </header>
+
+    <p id="intro">
+      Mathematize your name <br />
+      with our magical tool.<br /><b>Type your name in the box!</b>
+    </p>
+    <br />
+    <div class="input">
+      <input class="form" id="ti1" placeholder="Your name here" /><br /><br />
+      <input
+        class="button"
+        id="id1"
+        type="button"
+        value="Convert!"
+        onClick="clickHandler()"
+      />
+    </div>
+
+    <footer>
+      <p id="copy">&copy Eleonora2020</p>
+    </footer>
+
+    <script>
+      function convert_str2bin() {
+        var input_bin = document.getElementById("ti1").value;
+        var output_bin = document.getElementById("ti2");
+        output_bin.value = "";
+        for (i = 0; i < input_bin.length; i++) {
+          output_bin.value += input_bin[i].charCodeAt(0).toString(2) + " ";
+        }
+      }
+
+      function convert_bin2dec() {
+        var input_dec = document.getElementById("ti1").value;
+        var output_dec = document.getElementById("ti3");
+        output_dec.value = "";
+        for (i = 0; i < input_dec.length; i++) {
+          output_dec.value += input_dec[i].charCodeAt(0).toString(10);
+        }
+      }
+
+      function convert_dec2hex() {
+        var input_hex = document.getElementById("ti1").value;
+        var output_hex = document.getElementById("ti4");
+        output_hex.value = "";
+        for (i = 0; i < input_hex.length; i++) {
+          output_hex.value += input_hex[i].charCodeAt(0).toString(16);
+        }
+        output_hex.value =
+          "#" +
+          output_hex.value.substring(0, 6) +
+          " " +
+          "#" +
+          output_hex.value.substring(6, 12) +
+          " " +
+          "#" +
+          output_hex.value.substring(12, 18);
+      }
+
+      function hashCode(str) {
+        var hash = 0;
+        for (var i = 0; i < str.length; i++) {
+          hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        return hash;
+      }
+
+      function intToRGB(i) {
+        var c = (i & 0x00ffffff).toString(16).toUpperCase();
+
+        return "00000".substring(0, 6 - c.length) + c;
+      }
+
+      function convert_str2hex() {
+        var output_hexfromstr = document.getElementById("ti4");
+        output_hexfromstr.value = "";
+        output_hexfromstr.value =
+          "#" + intToRGB(hashCode(document.getElementById("ti1").value));
+      }
+
+      function changeColor() {
+        document.getElementById(
+          "sq1"
+        ).style.background = document
+          .getElementById("ti4")
+          .value.substring(0, 7);
+        document.getElementById(
+          "sq2"
+        ).style.background = document
+          .getElementById("ti4")
+          .value.substring(8, 15);
+        document.getElementById(
+          "sq3"
+        ).style.background = document
+          .getElementById("ti4")
+          .value.substring(16, 23);
+      }
+    </script>
+  </body>
+</html>

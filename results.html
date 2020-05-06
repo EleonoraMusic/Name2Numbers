@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<head>
+  <title>Name2Numbers</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Discover the numerical value of your name">
+    <meta name="author" content="Eleonora Musicco">
+    <meta name="keywords" content="Math, Names, mathematical values, colors, transformations">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="src/ele.js"></script>
+    <link rel="stylesheet" href="src/style.css" />
+</head>
+
+  <body>
+
+    <header>
+      <h1>Name2Numbers</h1><br/>
+    </header>
+
+    <section id="results">
+
+      <div class="str2bin">
+        <p>Your name in <b>binary code</b>: </p><br/>
+        <output name="binary" id="ti2"> <output/>
+      </div>
+
+    <br/>
+
+      <div class="bin2dec">
+        <p>Your name in <b>decimal code</b>: </p><br/>
+        <output name="decimal" id="ti3"> <output/>
+      </div>
+
+    <br/>
+
+      <div class="dec2hex">
+        <p>Your name in <b>hex code</b>: </p><br/>
+        <output name="hex" id="ti4"> </output>
+      </div>
+
+    <br/>
+
+      <div class="hex2color">
+        <p>...and this is your name <b>in colors!</b></p>
+      </div>
+
+    <br/>
+
+      <div id="container">
+        <ul id="griglia">
+          <li id="sq1" class="square1"></li>
+          <li id="sq2" class="square2"></li>
+          <li id="sq3" class="square3"></li>
+        </ul>
+      </div>
+
+    <br/>
+
+      <a href="index.html"><button class="button_Restart">Restart the game!</button></a>
+
+
+    <footer>
+      <p id="copy">&copy Eleonora2020</p>
+    </footer>
+
+    </section>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+
+  <script>
+
+      function getQsPartial (collection, order) {
+        return collection[index].split('=')[1]
+      }
+
+      function $(selector) {
+        return document.querySelector(selector)
+      }
+
+      function writeResult (elementId, result) {
+        var HTMLelement = $('#' + elementId)
+        HTMLelement.innerHTML = result
+      }
+
+      function setBackground (elId, hex) {
+        var HTMLelement = $('#' + elId)
+        console.log(elId, hex, HTMLelement)
+        HTMLelement.style.background = hex
+      }
+
+      function getData() {
+        // String.split
+        var splitted = document.location.href.split('?')
+       var queryString = decodeURIComponent(splitted[1])
+       var collection = queryString.split('&') // array
+       // var bin = getQsPartial(0)
+       var bin = collection[0].split('=')[1]
+       var dec = collection[1].split('=')[1]
+       var hex = collection[2].split('=')[1]
+
+       // return { bin, dec, hex }
+       return {
+         bin: bin,
+        dec: dec,
+        hex: hex
+       }
+      }
+
+      var results = getData();
+      console.log(results.hex)
+      writeResult('ti2', results.bin);
+      writeResult('ti3', results.dec);
+      writeResult('ti4', results.hex);
+      var hex = results.hex.split(' ')
+      setBackground('sq1', hex[0])
+      setBackground('sq2', hex[1])
+      setBackground('sq3', hex[2])
+
+    </script>
+
+</body>
+</html>
